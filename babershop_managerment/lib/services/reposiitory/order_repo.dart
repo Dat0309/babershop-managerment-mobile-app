@@ -1,0 +1,135 @@
+import 'dart:convert';
+
+import 'package:babershop_managerment/constant/app_url.dart';
+import 'package:babershop_managerment/models/CartModel.dart';
+import 'package:babershop_managerment/services/preferences/user_preference.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
+class OrderRepo extends GetxService {
+  OrderRepo();
+
+  String token = "";
+
+  Future<http.Response> createOrder(
+      String babershopId,
+      String staff,
+      List<Cart> servicesItems,
+      String paymentMethod,
+      int serviceTotalPrice) async {
+    token = await UserPreference().getToken();
+    var orderItems = jsonEncode(servicesItems.map((e) => e.toJson()).toList());
+
+    final Map<String, dynamic> orders = {
+      'services_items': Get.find(), // include find service item in here
+      'payment_method': paymentMethod,
+      'staff': staff,
+      'babershop': babershopId,
+      'service_total_price': serviceTotalPrice,
+    };
+
+    print(orders);
+
+    http.Response response = await http.post(
+      Uri.parse(AppUrl.ORDER),
+      body: json.encode(orders),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return response;
+  }
+
+  Future<http.Response> adminGetAllOrders() async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse(AppUrl.ADMIN_GET_ALL_ORDER),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
+  Future<http.Response> staffGetAllOrders() async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse(AppUrl.STAFF_GET_ALL_ORDER),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
+  Future<http.Response> getOrders() async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse(AppUrl.ORDER),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
+  Future<http.Response> staffGetBabershopOrder() async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse(AppUrl.STAFF_GET_BABERSHOP_ORDER),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
+  Future<http.Response> adminGetBabershopOrder(String id) async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse("${AppUrl.ADMIN_GET_BABERSHOP_ORDER}/$id"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
+  Future<http.Response> adminGetStaffOrder(String id) async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse("${AppUrl.ADMIN_GET_ORDER_OF_STAFF}/$id"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
+  Future<http.Response> getOrderById(String id) async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse("${AppUrl.ORDER}/$id"),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+}

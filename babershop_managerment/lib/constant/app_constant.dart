@@ -4,4 +4,5 @@ class AppConstant {
   static String TOKEN = "TOKEN";
   static String USERNAME = "USERNAME";
   static String PASSWORD = "PASSWORD";
+  static String CART = "CART";
 }

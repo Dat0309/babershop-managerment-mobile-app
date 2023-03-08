@@ -26,4 +26,7 @@ class AppUrl {
       ORDER + "/staff-get-babershop-order";
   static const String ADMIN_GET_ORDER_OF_STAFF =
       ORDER + "/admin-get-order-staff";
+
+  static const String ADMIN_GET_BABERSHOP_ORDER =
+      ORDER + "/admin-get-barbershop-order";
 }
