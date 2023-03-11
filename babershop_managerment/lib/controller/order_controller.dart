@@ -37,10 +37,13 @@ class OrderController extends GetxController {
       if (value.statusCode == 200) {
         final Map<String, dynamic> resData = json.decode(value.body);
 
-        if (resData.isNotEmpty) {
+        if (resData['order'].length > 0) {
           baberOrdersByAdmin.clear();
-          for (var item in resData.values) {
-            baberOrdersByAdmin.add(Order.fromJson(item));
+          for (int i = 0; i < resData['order'].length; i++) {
+            if (resData['order'][i] != null) {
+              Map<String, dynamic> map = resData['order'][i];
+              baberOrdersByAdmin.add(Order.fromMap(map));
+            }
           }
           adminLoadedBaberOrder = true;
           update();
@@ -55,10 +58,13 @@ class OrderController extends GetxController {
       if (value.statusCode == 200) {
         final Map<String, dynamic> resData = json.decode(value.body);
 
-        if (resData.isNotEmpty) {
+        if (resData['order'].length > 0) {
           staffOrderByAdmin.clear();
-          for (var item in resData.values) {
-            staffOrderByAdmin.add(Order.fromJson(item));
+          for (int i = 0; i < resData['order'].length; i++) {
+            if (resData['order'][i] != null) {
+              Map<String, dynamic> map = resData['order'][i];
+              staffOrderByAdmin.add(Order.fromMap(map));
+            }
           }
           adminLoadedStaffOrder = true;
           update();
@@ -73,10 +79,13 @@ class OrderController extends GetxController {
       if (value.statusCode == 200) {
         final Map<String, dynamic> resData = json.decode(value.body);
 
-        if (resData.isNotEmpty) {
+        if (resData['order'].length > 0) {
           staffOrderByStaff.clear();
-          for (var item in resData.values) {
-            staffOrderByStaff.add(Order.fromJson(item));
+          for (int i = 0; i < resData['order'].length; i++) {
+            if (resData['order'][i] != null) {
+              Map<String, dynamic> map = resData['order'][i];
+              staffOrderByStaff.add(Order.fromMap(map));
+            }
           }
           staffLoadedOrder = true;
           update();
@@ -91,15 +100,19 @@ class OrderController extends GetxController {
       if (value.statusCode == 200) {
         final Map<String, dynamic> resData = json.decode(value.body);
 
-        if (resData.isNotEmpty) {
+        if (resData['order'].length > 0) {
           baberOrderByStaff.clear();
-          for (var item in resData.values) {
-            baberOrderByStaff.add(Order.fromJson(item));
+          for (int i = 0; i < resData['order'].length; i++) {
+            if (resData['order'][i] != null) {
+              Map<String, dynamic> map = resData['order'][i];
+              baberOrderByStaff.add(Order.fromMap(map));
+            }
           }
           staffLoadedBaberOrder = true;
           update();
         }
-      }
+      } else {}
+      return value;
     });
   }
 

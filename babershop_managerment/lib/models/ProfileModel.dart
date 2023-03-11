@@ -58,7 +58,7 @@ class Profile {
       'avatar': avatar,
       'role': role,
       'babershop_id': baberShopId,
-      'createAt': createAt,
+      'createdAt': createAt,
     };
   }
 
@@ -73,8 +73,8 @@ class Profile {
       avatar: map['avatar'] != null ? map['avatar'] as String : null,
       role: map['role'] != null ? map['role'] as String : null,
       baberShopId:
-          map['babershop_id'] != null ? map['baberShopId'] as String : null,
-      createAt: map['createAt'] != null ? map['createAt'] as String : null,
+          map['babershop_id'] != null ? map['babershop_id'] as String : null,
+      createAt: map['createdAt'] != null ? map['createdAt'] as String : null,
     );
   }
 

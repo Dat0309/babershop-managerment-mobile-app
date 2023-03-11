@@ -40,10 +40,11 @@ class _AppBarCustomState extends State<AppBarCustom> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius15),
                       color: AppColors.thirthColor,
-                    ),
-                    child: Image.network(
-                      user.profile!.avatar!,
-                      fit: BoxFit.cover,
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            user.profile!.avatar!,
+                          ),
+                          fit: BoxFit.cover),
                     ),
                   )
                 : Container(

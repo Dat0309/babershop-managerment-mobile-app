@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
     Get.find<AuthController>().checkUserLogged();
     Get.find<ServiceController>().getServices();
     Get.find<BabershopController>().getBabershop();
+    Get.find<HairStyleController>().getLimitHairstyle();
     Get.find<HairStyleController>().getHairstyle();
     Get.find<OrderController>();
     Get.find<UserController>();
