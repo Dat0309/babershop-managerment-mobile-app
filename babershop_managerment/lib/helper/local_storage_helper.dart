@@ -11,7 +11,7 @@ class LocalSrorageHelper {
   Box<dynamic>? hiveBox;
 
   static initLocalStorageHelper() async {
-    _shared.hiveBox = await Hive.openBox('food_recipe_app');
+    _shared.hiveBox = await Hive.openBox('babershop_managerment');
   }
 
   static dynamic getValues(String key) {
@@ -21,6 +21,6 @@ class LocalSrorageHelper {
 
   static setValue(String key, dynamic val) {
     _shared.hiveBox?.put(key, val);
-    print(_shared.hiveBox?.get(key));
+    print(key);
   }
 }

@@ -5,6 +5,7 @@ import 'package:babershop_managerment/constant/textstyle_constant.dart';
 import 'package:babershop_managerment/helper/asset_helper.dart';
 import 'package:babershop_managerment/helper/local_storage_helper.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
+import 'package:babershop_managerment/views/authentication/login_screen.dart';
 import 'package:babershop_managerment/views/home/navigation.dart';
 import 'package:babershop_managerment/views/intro/widgets/item_intro_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -86,8 +87,10 @@ class _IntroScreenState extends State<IntroScreen> {
                 GestureDetector(
                   onTap: () {
                     if (_pageController.page == 2) {
-                      LocalSrorageHelper.setValue('ignoreIntroScreen', true);
-                      Get.off(const NavigationPage());
+                      LocalSrorageHelper.setValue(
+                          'BaberignoreIntroScreen', true);
+
+                      Get.off(() => const LoginScreen());
                     } else {
                       _pageController.nextPage(
                           duration: const Duration(milliseconds: 200),

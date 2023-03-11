@@ -9,11 +9,12 @@ class UserPreference {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
 
-    sharedPreferences.setString('id', auth.id!);
+    sharedPreferences.setString('_id', auth.id!);
+    sharedPreferences.setString('babershop_id', auth.babershopId!);
     sharedPreferences.setString('role', auth.role!);
     sharedPreferences.setString('token', auth.token!);
     sharedPreferences.setString('full_name', auth.fullName!);
-    sharedPreferences.setString('createAt', auth.createAt!);
+    sharedPreferences.setString('createdAt', auth.createAt!);
 
     return sharedPreferences.commit();
   }
@@ -23,6 +24,7 @@ class UserPreference {
         await SharedPreferences.getInstance();
 
     String? id = sharedPreferences.getString("id");
+    String? babershopId = sharedPreferences.getString("babershop_id");
     String? fullName = sharedPreferences.getString("full_name");
     String? role = sharedPreferences.getString("role");
     String? createAt = sharedPreferences.getString("createAt");
@@ -30,6 +32,7 @@ class UserPreference {
 
     return AuthModel(
       id: id,
+      babershopId: babershopId,
       fullName: fullName,
       role: role,
       createAt: createAt,
@@ -42,6 +45,7 @@ class UserPreference {
         await SharedPreferences.getInstance();
 
     sharedPreferences.remove("id");
+    sharedPreferences.remove("babershop_id");
     sharedPreferences.remove("full_name");
     sharedPreferences.remove("role");
     sharedPreferences.remove("createAt");
