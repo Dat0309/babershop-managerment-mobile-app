@@ -94,6 +94,19 @@ class OrderRepo extends GetxService {
     return res;
   }
 
+  Future<http.Response> staffGetAllBabershopOrder() async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse(AppUrl.STAFF_GET_ALL_BABERSHOP_ORDER),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
   Future<http.Response> adminGetBabershopOrder(String id) async {
     String token = await UserPreference().getToken();
     http.Response res = await http.get(

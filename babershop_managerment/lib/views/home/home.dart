@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Get.find<UserController>().getProfile();
     Get.find<OrderController>().staffGetAllOrderIOfThem();
+    Get.find<OrderController>().staffGetOrdersOfBabershop();
     Get.find<OrderController>().staffGetAllOrdersOfBabershop();
     return LayoutBuilder(builder: (context, constraints) {
       return SingleChildScrollView(

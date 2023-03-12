@@ -20,6 +20,7 @@ class OrderController extends GetxController {
   List<dynamic> staffOrderByAdmin = [];
   List<dynamic> baberOrderByStaff = [];
   List<dynamic> staffOrderByStaff = [];
+  List<dynamic> baberAllOrderByStaff = [];
 
   Order? order;
   CartController cartController = Get.find();
@@ -28,6 +29,7 @@ class OrderController extends GetxController {
   bool adminLoadedBaberOrder = false;
   bool adminLoadedStaffOrder = false;
   bool staffLoadedBaberOrder = false;
+  bool staffLoadedAllBaberOrder = false;
   bool staffLoadedOrder = false;
   bool isCreated = false;
 
@@ -94,7 +96,7 @@ class OrderController extends GetxController {
     });
   }
 
-  Future<void> staffGetAllOrdersOfBabershop() async {
+  Future<void> staffGetOrdersOfBabershop() async {
     staffLoadedBaberOrder = false;
     await orderRepo.staffGetBabershopOrder().then((value) {
       if (value.statusCode == 200) {
@@ -105,10 +107,32 @@ class OrderController extends GetxController {
           for (int i = 0; i < resData['order'].length; i++) {
             if (resData['order'][i] != null) {
               Map<String, dynamic> map = resData['order'][i];
-              baberOrderByStaff.add(Order.fromMap(map));
+              baberAllOrderByStaff.add(Order.fromMap(map));
             }
           }
           staffLoadedBaberOrder = true;
+          update();
+        }
+      } else {}
+      return value;
+    });
+  }
+
+  Future<void> staffGetAllOrdersOfBabershop() async {
+    staffLoadedAllBaberOrder = false;
+    await orderRepo.staffGetAllBabershopOrder().then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> resData = json.decode(value.body);
+
+        if (resData['order'].length > 0) {
+          baberAllOrderByStaff.clear();
+          for (int i = 0; i < resData['order'].length; i++) {
+            if (resData['order'][i] != null) {
+              Map<String, dynamic> map = resData['order'][i];
+              baberAllOrderByStaff.add(Order.fromMap(map));
+            }
+          }
+          staffLoadedAllBaberOrder = true;
           update();
         }
       } else {}

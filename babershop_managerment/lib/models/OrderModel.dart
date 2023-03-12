@@ -9,12 +9,14 @@ class Order {
   List<dynamic>? servicesItems;
   String? paymentMethod;
   int? serviceTotalPrice;
+  String? createdAt;
   Order({
     this.babershopId,
     this.staffId,
     this.servicesItems,
     this.paymentMethod,
     this.serviceTotalPrice,
+    this.createdAt,
   });
 
   Order copyWith({
@@ -23,6 +25,7 @@ class Order {
     List<dynamic>? servicesItems,
     String? paymentMethod,
     int? serviceTotalPrice,
+    String? createdAt,
   }) {
     return Order(
       babershopId: babershopId ?? this.babershopId,
@@ -30,6 +33,7 @@ class Order {
       servicesItems: servicesItems ?? this.servicesItems,
       paymentMethod: paymentMethod ?? this.paymentMethod,
       serviceTotalPrice: serviceTotalPrice ?? this.serviceTotalPrice,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
@@ -40,6 +44,7 @@ class Order {
       'servicesItems': servicesItems,
       'paymentMethod': paymentMethod,
       'serviceTotalPrice': serviceTotalPrice,
+      'createdAt': createdAt,
     };
   }
 
@@ -56,6 +61,7 @@ class Order {
       serviceTotalPrice: map['service_total_price'] != null
           ? map['service_total_price'] as int
           : null,
+      createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
     );
   }
 
