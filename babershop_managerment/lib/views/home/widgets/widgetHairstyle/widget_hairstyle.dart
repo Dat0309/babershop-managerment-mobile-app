@@ -1,13 +1,12 @@
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/controller/hairstyle_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
+import 'package:babershop_managerment/views/hairStyle/hair_style_screen.dart';
+import 'package:babershop_managerment/views/hairStyle/widgets/imageview.dart';
 import 'package:babershop_managerment/views/home/widgets/widgetHairstyle/hairstyle_widget_card.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -36,7 +35,9 @@ class _WidgetHairstyleState extends State<WidgetHairstyle> {
               children: [
                 const BigText(text: 'Tư vấn kiểu tóc'),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const HairStyleScreen());
+                  },
                   child: const SmallText(
                     text: 'Xem tất cả',
                     color: AppColors.primaryColor,
@@ -59,7 +60,11 @@ class _WidgetHairstyleState extends State<WidgetHairstyle> {
                         return Column(
                           children: [
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Get.to(() => ImageView(
+                                    img: hairStyleController
+                                        .hairstyles[index].image));
+                              },
                               child: HairstyleWidgetCard(
                                 image:
                                     hairStyleController.hairstyles[index].image,
