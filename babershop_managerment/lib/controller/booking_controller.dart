@@ -1,15 +1,12 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:babershop_managerment/models/CartModel.dart';
 import 'package:babershop_managerment/models/ServiceModel.dart';
+import 'package:babershop_managerment/services/reposiitory/booking_repo.dart';
 import 'package:get/get.dart';
 
-import 'package:babershop_managerment/services/reposiitory/cart_repo.dart';
+class BookingController extends GetxController {
+  final BookingRepo bookingRepo;
 
-class CartController extends GetxController {
-  final CartRepo cartRepo;
-  CartController({
-    required this.cartRepo,
-  });
+  BookingController({required this.bookingRepo});
 
   Map<String, Cart> items = {};
   List<Cart> storageItems = [];
@@ -19,7 +16,7 @@ class CartController extends GetxController {
     items.forEach((key, value) {
       totalQuantity += value.qty!;
     });
-    update();
+    //update();
     return totalQuantity;
   }
 
@@ -27,11 +24,12 @@ class CartController extends GetxController {
     var price = 0;
     items.forEach((key, value) {
       price += value.price! * value.qty!;
+      print(price);
     });
     return price;
   }
 
-  set setCart(List<Cart> listItems) {
+  set setBooking(List<Cart> listItems) {
     storageItems = listItems;
     for (var item in storageItems) {
       items.putIfAbsent(item.serviceId!, () => item);
@@ -46,44 +44,47 @@ class CartController extends GetxController {
                 name: value.name,
                 serviceId: value.serviceId,
                 price: value.price,
-                qty: value.qty! + qty,
+                percent: value.percent,
+                qty: qty,
               ));
     }
     update();
   }
 
-  void removeItem(Cart cart) {
-    items.remove(cart.serviceId);
-    cartRepo.addToCartList(getItems);
+  void removeItem(Services service) {
+    items.remove(service.id);
+    bookingRepo.addToBookingList(getItems);
     update();
   }
 
-  void addItem(Services services, int qty) {
-    if (items.containsKey(services.id)) {
-      items.update(services.id!, (value) {
+  void addItem(Services service, int qty) {
+    if (items.containsKey(service.id)) {
+      items.update(service.id!, (value) {
         return Cart(
           name: value.name,
           serviceId: value.serviceId,
           price: value.price,
+          percent: service.percent,
           qty: value.qty! + qty,
         );
       });
     } else {
       items.putIfAbsent(
-          services.id!,
+          service.id!,
           () => Cart(
-                name: services.name,
-                serviceId: services.id,
-                price: services.price,
+                name: service.name,
+                serviceId: service.id,
+                price: service.price,
+                percent: service.percent,
                 qty: qty,
               ));
     }
-    cartRepo.addToCartList(getItems);
+    bookingRepo.addToBookingList(getItems);
     update();
   }
 
-  bool existInCart(Services services) {
-    if (items.containsKey(services.id)) {
+  bool existInBooking(Services service) {
+    if (items.containsKey(service.id)) {
       return true;
     }
     return false;
@@ -95,13 +96,12 @@ class CartController extends GetxController {
     }).toList();
   }
 
-  List<Cart> getCartData() {
-    setCart = cartRepo.getCartList();
-    return storageItems;
+  List<Cart> getBookingData() {
+    return setBooking = bookingRepo.getBookingList();
   }
 
-  void clearCart() {
-    cartRepo.clearCartStorage();
+  void clearBooking() {
+    bookingRepo.clearBookingStorage();
     items.clear();
     update();
   }

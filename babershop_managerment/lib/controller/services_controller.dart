@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:babershop_managerment/constant/colors.dart';
-import 'package:babershop_managerment/controller/cart_controller.dart';
+import 'package:babershop_managerment/controller/booking_controller.dart';
 import 'package:babershop_managerment/models/CartModel.dart';
 import 'package:babershop_managerment/models/ServiceModel.dart';
 import 'package:flutter/material.dart';
@@ -20,27 +20,27 @@ class ServiceController extends GetxController {
 
   bool isLoaded = false;
 
-  CartController _cart = Get.find<CartController>();
+  BookingController _booking = Get.find<BookingController>();
 
-  double get amount => cartTotalPrice.toDouble();
+  double get amount => bookingTotalPrice.toDouble();
 
   int _quantity = 1;
   int get quantity => _quantity;
 
-  int _inCartItem = 0;
-  int get inCartItem => _inCartItem + _quantity;
+  int _inBookingItem = 0;
+  int get inBookingItem => _inBookingItem + _quantity;
 
   bool _itemExist = false;
   bool get itemExist => _itemExist;
 
-  int get cartTotalItem => _cart.totalItems;
-  int get cartTotalPrice => _cart.totalPrice;
+  int get bookingTotalItem => _booking.totalItems;
+  int get bookingTotalPrice => _booking.totalPrice;
 
-  void initServices(Services services, CartController cartController) {
-    _cart = cartController;
+  void initServices(Services services, BookingController cartController) {
+    _booking = cartController;
     _quantity = 1;
-    _inCartItem = 1;
-    _itemExist = cartController.existInCart(services);
+    _inBookingItem = 1;
+    _itemExist = cartController.existInBooking(services);
   }
 
   Future<void> getServices() async {
@@ -64,37 +64,13 @@ class ServiceController extends GetxController {
     });
   }
 
-  void setQuantity(bool isIncrement) {
-    if (isIncrement) {
-      _quantity = checkQty(_quantity + 1);
-    } else {
-      _quantity = checkQty(_quantity - 1);
-    }
-    update();
-  }
-
-  int checkQty(int qty) {
-    if (qty < 0) {
-      return 0;
-    } else if (qty > 10) {
-      Get.snackbar(
-        'Số lượng dịch vụ',
-        'Bạn chỉ được sử dụng số lượng tối đa là 10!',
-        backgroundColor: AppColors.primaryColor,
-        colorText: Colors.white,
-      );
-      return 10;
-    }
-    return qty;
-  }
-
-  void addItem(Services service) {
-    if (_quantity > 0) {
-      _cart.addItem(service, _quantity);
+  void addBookingItem(Services product, int qty) {
+    if (qty > 0) {
+      _booking.addItem(product, qty);
     } else {
       Get.snackbar(
         'Lỗi',
-        'Xin hãy chọn số lượng sản phẩm trước khi thêm vào giỏ hàng!',
+        'Xin hãy chọn số lượng dịch vụ được sử dụng!',
         backgroundColor: AppColors.primaryColor,
         colorText: Colors.white,
       );
@@ -102,15 +78,31 @@ class ServiceController extends GetxController {
     update();
   }
 
-  void removeItem(Cart cart) {
-    _cart.removeItem(cart);
+  void removeBookingItem(Services service) {
+    if (_booking.existInBooking(service)) {
+      _booking.removeItem(service);
+    }
+    update();
+  }
+
+  List<Cart> get getBookingItems {
+    return _booking.getItems;
+  }
+
+  List<Cart> get getBookingItemsStorage {
+    return _booking.getBookingData();
   }
 
   Map<String, dynamic> get getItemJson {
-    return _cart.items;
+    return _booking.items;
   }
 
-  void clearCard() {
-    _cart.clearCart();
+  void updateBookingQty(String id, int qty) {
+    _booking.updateItemQty(id, qty);
+    update();
+  }
+
+  void clearBooking() {
+    _booking.clearBooking();
   }
 }

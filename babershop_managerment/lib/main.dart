@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:babershop_managerment/controller/auth_controller.dart';
 import 'package:babershop_managerment/controller/babershop_controller.dart';
-import 'package:babershop_managerment/controller/cart_controller.dart';
+import 'package:babershop_managerment/controller/booking_controller.dart';
 import 'package:babershop_managerment/controller/hairstyle_controller.dart';
 import 'package:babershop_managerment/controller/order_controller.dart';
 import 'package:babershop_managerment/controller/services_controller.dart';
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
     Get.find<HairStyleController>().getHairstyle();
     Get.find<OrderController>();
     Get.find<UserController>();
-    Get.find<CartController>().getCartData();
+    Get.find<BookingController>();
 
     return const GetMaterialApp(
       title: 'LAMHOTTOC',

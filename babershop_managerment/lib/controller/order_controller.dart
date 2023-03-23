@@ -1,10 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:babershop_managerment/controller/cart_controller.dart';
+import 'package:babershop_managerment/controller/booking_controller.dart';
 import 'package:babershop_managerment/models/CartModel.dart';
 import 'package:babershop_managerment/models/OrderModel.dart';
 import 'package:babershop_managerment/services/preferences/user_preference.dart';
+import 'package:babershop_managerment/views/home/navigation.dart';
 import 'package:get/get.dart';
 
 import 'package:babershop_managerment/services/reposiitory/order_repo.dart';
@@ -23,7 +24,7 @@ class OrderController extends GetxController {
   List<dynamic> baberAllOrderByStaff = [];
 
   Order? order;
-  CartController cartController = Get.find();
+  BookingController bookingController = Get.find();
 
   bool isLoadedOrders = false;
   bool adminLoadedBaberOrder = false;
@@ -146,18 +147,21 @@ class OrderController extends GetxController {
     int serviceToTalPrice,
   ) async {
     var result;
-    String staffId =
-        await UserPreference().getUser().then((value) => value.id!);
-    String babershopId =
-        await UserPreference().getUser().then((value) => value.babershopId!);
+    // String staffId =
+    //     await UserPreference().getUser().then((value) => value.id!);
+    // String babershopId =
+    //     await UserPreference().getUser().then((value) => value.babershopId!);
 
     await orderRepo
-        .createOrder(babershopId, staffId, servicesItems, paymentMethod,
-            serviceToTalPrice)
+        .createOrder(
+      servicesItems,
+      paymentMethod,
+      serviceToTalPrice,
+    )
         .then((value) {
       if (value.statusCode == 201) {
         final Map<String, dynamic> resData = json.decode(value.body);
-        Order order = Order.fromMap(resData);
+        Order order = Order.fromMap(resData['createOrder']);
         isCreated = true;
 
         result = {
@@ -165,12 +169,13 @@ class OrderController extends GetxController {
           'message': 'Successfull',
           'order': order,
         };
-        cartController.clearCart();
+        bookingController.clearBooking();
         update();
       } else {
         result = {
           'status': false,
-          'message': 'Error',
+          'code': value.statusCode,
+          'message': value.body,
         };
         update();
       }

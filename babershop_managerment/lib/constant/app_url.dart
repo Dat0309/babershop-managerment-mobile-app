@@ -10,6 +10,8 @@ class AppUrl {
   static const String REGISTER = USERS;
   static const String PROFILE = USERS + "/profile";
 
+  static const String USER_UPDATE_SALARY = USERS + "/update-salary";
+
   static const String BABERSHOP = BASEURL + "babershops";
   static const String ADMIN_GET_ALL_BABERSHOP = BABERSHOP + "/all";
 

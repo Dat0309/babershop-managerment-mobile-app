@@ -11,24 +11,20 @@ class OrderRepo extends GetxService {
 
   String token = "";
 
-  Future<http.Response> createOrder(
-      String babershopId,
-      String staff,
-      List<Cart> servicesItems,
-      String paymentMethod,
-      int serviceTotalPrice) async {
+  Future<http.Response> createOrder(List<Cart> servicesItems,
+      String paymentMethod, int serviceTotalPrice) async {
     token = await UserPreference().getToken();
-    var orderItems = jsonEncode(servicesItems.map((e) => e.toJson()).toList());
+    var orderItems = json.encode(servicesItems.map((e) => e.toMap()).toList());
 
     final Map<String, dynamic> orders = {
-      'services_items': Get.find(), // include find service item in here
+      'services_items': servicesItems
+          .map((e) => e.toMap())
+          .toList(), // include find service item in here
       'payment_method': paymentMethod,
-      'staff': staff,
-      'babershop': babershopId,
       'service_total_price': serviceTotalPrice,
     };
 
-    print(orders);
+    print(json.encode(orders));
 
     http.Response response = await http.post(
       Uri.parse(AppUrl.ORDER),

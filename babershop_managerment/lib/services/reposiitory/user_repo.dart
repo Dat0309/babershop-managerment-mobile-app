@@ -22,4 +22,18 @@ class UserRepo extends GetxService {
     );
     return res;
   }
+
+  Future<http.Response> updateSalary(int salary) async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.put(
+      Uri.parse(AppUrl.USER_UPDATE_SALARY),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: {salary: salary},
+    );
+    return res;
+  }
 }

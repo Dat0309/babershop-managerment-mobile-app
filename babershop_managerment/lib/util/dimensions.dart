@@ -10,7 +10,7 @@ class Dimensions {
   static double pageViewTextContainer = screenHeight / 8.04;
 
   // padding
-  static double widthPadding5 = screenWidth / 96; 
+  static double widthPadding5 = screenWidth / 96;
   static double widthPadding8 = screenWidth / 60;
   static double heightPadding8 = screenHeight / 120.6625;
   static double heightPadding10 = screenHeight / 96.53;
@@ -57,4 +57,8 @@ class Dimensions {
   static double font32 = screenHeight / 30.16;
   static double font24 = screenHeight / 39.84;
   static double font16 = screenHeight / 60.33125;
+
+  static double defaultPadding = widthPadding20;
+  static double cartBarHeight = height120 - 20;
+  static double headerHeight = heightPadding60 + 30;
 }

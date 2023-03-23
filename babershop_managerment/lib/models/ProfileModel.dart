@@ -11,6 +11,8 @@ class Profile {
   String? avatar;
   String? role;
   String? baberShopId;
+  int? salary;
+  List<dynamic>? salary_history;
   String? createAt;
   Profile({
     this.id,
@@ -21,6 +23,8 @@ class Profile {
     this.avatar,
     this.role,
     this.baberShopId,
+    this.salary,
+    this.salary_history,
     this.createAt,
   });
 
@@ -44,6 +48,8 @@ class Profile {
       avatar: avatar ?? this.avatar,
       role: role ?? this.role,
       baberShopId: baberShopId ?? this.baberShopId,
+      salary: salary ?? this.salary,
+      salary_history: salary_history ?? this.salary_history,
       createAt: createAt ?? this.createAt,
     );
   }
@@ -58,6 +64,8 @@ class Profile {
       'avatar': avatar,
       'role': role,
       'babershop_id': baberShopId,
+      'salary': salary,
+      'salary_history': salary_history,
       'createdAt': createAt,
     };
   }
@@ -74,6 +82,10 @@ class Profile {
       role: map['role'] != null ? map['role'] as String : null,
       baberShopId:
           map['babershop_id'] != null ? map['babershop_id'] as String : null,
+      salary: map['salary'] != null ? map['salary'] as int : null,
+      salary_history: map['salary_history'] != null
+          ? List<dynamic>.from((map['salary_history'] as List<dynamic>))
+          : null,
       createAt: map['createdAt'] != null ? map['createdAt'] as String : null,
     );
   }

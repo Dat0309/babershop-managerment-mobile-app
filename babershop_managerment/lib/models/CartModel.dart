@@ -4,14 +4,15 @@ import 'dart:convert';
 class Cart {
   String? name;
   int? qty;
-  String? image;
   int? price;
   String? serviceId;
+  double? percent;
   Cart({
     this.name,
     this.qty,
     this.price,
     this.serviceId,
+    this.percent,
   });
 
   Cart copyWith({
@@ -19,12 +20,14 @@ class Cart {
     int? qty,
     int? price,
     String? serviceId,
+    double? percent,
   }) {
     return Cart(
       name: name ?? this.name,
       qty: qty ?? this.qty,
       price: price ?? this.price,
       serviceId: serviceId ?? this.serviceId,
+      percent: percent ?? this.percent,
     );
   }
 
@@ -34,6 +37,7 @@ class Cart {
       'qty': qty,
       'price': price,
       'services': serviceId,
+      'percent': percent,
     };
   }
 
@@ -43,6 +47,7 @@ class Cart {
       qty: map['qty'] != null ? map['qty'] as int : null,
       price: map['price'] != null ? map['price'] as int : null,
       serviceId: map['services'] != null ? map['services'] as String : null,
+      percent: map['percent'] != null ? map['percent'] as double : null,
     );
   }
 

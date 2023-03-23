@@ -10,6 +10,7 @@ class UserController extends GetxController {
   UserController({required this.userRepo});
 
   bool isLoadedProfile = false;
+  bool isUpdateSalary = false;
 
   late Profile? profile;
 
@@ -26,6 +27,25 @@ class UserController extends GetxController {
         }
       } else {
         print('user ${value.statusCode}');
+      }
+    });
+  }
+
+  Future<void> updateSalary(int salary) async {
+    await userRepo.updateSalary(salary).then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+
+        if (res.isNotEmpty) {
+          profile = Profile.fromMap(res);
+
+          isUpdateSalary = true;
+          update();
+        } else {
+          print('res is empty');
+        }
+      } else {
+        print('error');
       }
     });
   }

@@ -1,11 +1,11 @@
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
+import 'package:babershop_managerment/views/checkout/checkout_screen.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class ServiceContainer extends StatefulWidget {
   const ServiceContainer({super.key});
@@ -55,16 +55,22 @@ class _ServiceContainerState extends State<ServiceContainer> {
                 SizedBox(
                   height: Dimensions.heightPadding20,
                 ),
-                Container(
-                  margin:
-                      EdgeInsets.only(left: Dimensions.widthPadding300 - 45),
-                  padding: EdgeInsets.all(Dimensions.widthPadding10),
-                  decoration: BoxDecoration(
-                      color: AppColors.secondaryColor,
-                      borderRadius: BorderRadius.circular(Dimensions.radius15)),
-                  child: BigText(
-                    text: 'Thanh Toán',
-                    size: Dimensions.font16,
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => const CheckoutScreen());
+                  },
+                  child: Container(
+                    margin:
+                        EdgeInsets.only(left: Dimensions.widthPadding300 - 45),
+                    padding: EdgeInsets.all(Dimensions.widthPadding10),
+                    decoration: BoxDecoration(
+                        color: AppColors.secondaryColor,
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius15)),
+                    child: BigText(
+                      text: 'Thanh Toán',
+                      size: Dimensions.font16,
+                    ),
                   ),
                 ),
               ],
