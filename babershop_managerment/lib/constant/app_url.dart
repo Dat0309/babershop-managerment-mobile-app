@@ -33,4 +33,17 @@ class AppUrl {
 
   static const String ADMIN_GET_BABERSHOP_ORDER =
       ORDER + "/admin-get-barbershop-order";
+
+  static const String ADMIN_GET_ALL_SALARY =
+      ORDER + "/admin-get-all-staff-salary";
+
+  static const String EXTRACOST = BASEURL + "extracosts";
+  static const String ADMIN_GET_ALL_EXTRACOSTS =
+      EXTRACOST + "/admin-get-all-extracost";
+  static const String STAFF_GET_ALL_EXTRACOSTS =
+      EXTRACOST + "/staff-get-all-extracost";
+  static const String STAFF_GET_BABERSHOP_EXTRACOSTS =
+      EXTRACOST + "/staff-get-babershop-extracost";
+  static const String ADMIN_GET_BABERSHOP_EXTRACOSTS =
+      EXTRACOST + "/admin-get-babershop-order";
 }

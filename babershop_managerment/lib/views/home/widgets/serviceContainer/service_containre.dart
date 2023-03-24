@@ -1,6 +1,7 @@
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/checkout/checkout_screen.dart';
+import 'package:babershop_managerment/views/extraPrice/extra_price_screen.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -113,18 +114,23 @@ class _ServiceContainerState extends State<ServiceContainer> {
                         textOverflow: TextOverflow.visible,
                       ),
                     ),
-                    Container(
-                      width: Dimensions.widthPadding100,
-                      height: Dimensions.widthPadding100,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius15),
-                        color: AppColors.secondaryColor,
-                      ),
-                      child: Center(
-                        child: BigText(
-                          text: '+',
-                          size: Dimensions.iconSize50 + 20,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => const ExtraPriceScreen());
+                      },
+                      child: Container(
+                        width: Dimensions.widthPadding100,
+                        height: Dimensions.widthPadding100,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius15),
+                          color: AppColors.secondaryColor,
+                        ),
+                        child: Center(
+                          child: BigText(
+                            text: '+',
+                            size: Dimensions.iconSize50 + 20,
+                          ),
                         ),
                       ),
                     ),

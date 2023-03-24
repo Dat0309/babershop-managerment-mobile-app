@@ -55,6 +55,7 @@ class _ImageViewState extends State<ImageView> {
                         ),
                       ),
                       Container(
+                        padding: EdgeInsets.all(Dimensions.widthPadding20),
                         width: Dimensions.screenWidth / 2,
                         height: Dimensions.heightPadding60,
                         alignment: Alignment.center,

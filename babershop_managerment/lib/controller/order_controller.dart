@@ -22,6 +22,7 @@ class OrderController extends GetxController {
   List<dynamic> baberOrderByStaff = [];
   List<dynamic> staffOrderByStaff = [];
   List<dynamic> baberAllOrderByStaff = [];
+  List<Map<String, dynamic>> staffSalary = [];
 
   Order? order;
   BookingController bookingController = Get.find();
@@ -33,6 +34,28 @@ class OrderController extends GetxController {
   bool staffLoadedAllBaberOrder = false;
   bool staffLoadedOrder = false;
   bool isCreated = false;
+  bool isLoadedStaffSalary = false;
+
+  Future<void> adminGetAllSalary() async {
+    isLoadedStaffSalary = false;
+    await orderRepo.getAllStaffSalary().then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+
+        if (res['staffSalary'].length > 0) {
+          staffSalary.clear();
+          for (int i = 0; i < res['staffSalary'].length; i++) {
+            if (res['staffSalary'][i] != null) {
+              Map<String, dynamic> map = res['staffSalary'][i];
+              staffSalary.add(map);
+            }
+          }
+          isLoadedStaffSalary = true;
+          update();
+        }
+      }
+    });
+  }
 
   Future<void> adminGetAllOrderOfBabershop(String id) async {
     adminLoadedBaberOrder = false;

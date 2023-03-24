@@ -2,13 +2,10 @@ import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/controller/auth_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/authentication/widget/button.dart';
-import 'package:babershop_managerment/views/authentication/widget/check_box.dart';
-import 'package:babershop_managerment/views/authentication/widget/continues_text.dart';
 import 'package:babershop_managerment/views/authentication/widget/password_field.dart';
 import 'package:babershop_managerment/views/authentication/widget/rich_text.dart';
 import 'package:babershop_managerment/views/authentication/widget/text_field.dart';
 import 'package:babershop_managerment/views/home/navigation.dart';
-import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

@@ -141,4 +141,17 @@ class OrderRepo extends GetxService {
     );
     return res;
   }
+
+  Future<http.Response> getAllStaffSalary() async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse(AppUrl.ADMIN_GET_ALL_SALARY),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
 }
