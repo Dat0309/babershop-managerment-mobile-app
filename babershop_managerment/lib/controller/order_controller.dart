@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:babershop_managerment/controller/booking_controller.dart';
 import 'package:babershop_managerment/models/CartModel.dart';
 import 'package:babershop_managerment/models/OrderModel.dart';
+import 'package:babershop_managerment/models/statisticsModel.dart';
 import 'package:babershop_managerment/services/preferences/user_preference.dart';
 import 'package:babershop_managerment/views/home/navigation.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ class OrderController extends GetxController {
   List<Map<String, dynamic>> staffSalary = [];
 
   Order? order;
+  late StatistiscModel? statistiscModel;
   BookingController bookingController = Get.find();
 
   bool isLoadedOrders = false;
@@ -35,13 +37,14 @@ class OrderController extends GetxController {
   bool staffLoadedOrder = false;
   bool isCreated = false;
   bool isLoadedStaffSalary = false;
+  bool isLoadedAdminStatistics = false;
 
   Future<void> adminGetAllSalary() async {
     isLoadedStaffSalary = false;
     await orderRepo.getAllStaffSalary().then((value) {
       if (value.statusCode == 200) {
         final Map<String, dynamic> res = json.decode(value.body);
-
+        print(res);
         if (res['staffSalary'].length > 0) {
           staffSalary.clear();
           for (int i = 0; i < res['staffSalary'].length; i++) {
@@ -53,6 +56,26 @@ class OrderController extends GetxController {
           isLoadedStaffSalary = true;
           update();
         }
+      } else {
+        print(value.body);
+      }
+    });
+  }
+
+  Future<void> adminStatistics() async {
+    isLoadedAdminStatistics = false;
+
+    await orderRepo.adminStatistics().then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+
+        if (res['statistics'] != null) {
+          statistiscModel = StatistiscModel.fromMap(res['statistics']);
+          isLoadedAdminStatistics = true;
+          update();
+        }
+      } else {
+        print(value.body);
       }
     });
   }
@@ -74,6 +97,30 @@ class OrderController extends GetxController {
           adminLoadedBaberOrder = true;
           update();
         }
+      }
+    });
+  }
+
+  Future<void> adminGetAllOrder() async {
+    isLoadedOrders = false;
+    await orderRepo.adminGetAllOrders().then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+        print(res);
+
+        if (res['orders'].length > 0) {
+          orders.clear();
+          for (int i = 0; i < res['orders'].length; i++) {
+            if (res['orders'][i] != null) {
+              Map<String, dynamic> map = res['orders'][i];
+              orders.add(Order.fromMap(map));
+            }
+          }
+          isLoadedOrders = true;
+          update();
+        }
+      } else {
+        print(value.body);
       }
     });
   }

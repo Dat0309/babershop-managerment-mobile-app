@@ -22,7 +22,7 @@ class AppUrl {
   static const String GET_ALL_SERVICES = SERVICES + "/all";
 
   static const String ORDER = BASEURL + "orders";
-  static const String ADMIN_GET_ALL_ORDER = ORDER + "/addmin-get-all-order";
+  static const String ADMIN_GET_ALL_ORDER = ORDER + "/admin-get-all-order";
   static const String STAFF_GET_ALL_ORDER = ORDER + "/staff-get-all-order";
   static const String STAFF_GET_BABERSHOP_ORDER =
       ORDER + "/staff-get-babershop-order";
@@ -36,6 +36,8 @@ class AppUrl {
 
   static const String ADMIN_GET_ALL_SALARY =
       ORDER + "/admin-get-all-staff-salary";
+
+  static const String ADMIN_STATISTICS = ORDER + "/admin-statitis";
 
   static const String EXTRACOST = BASEURL + "extracosts";
   static const String ADMIN_GET_ALL_EXTRACOSTS =

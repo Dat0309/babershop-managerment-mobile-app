@@ -1,7 +1,7 @@
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/Managerment/managerment_page.dart';
-import 'package:babershop_managerment/views/Notification/notification_page.dart';
+import 'package:babershop_managerment/views/Setting/setting_page.dart';
 import 'package:babershop_managerment/views/Profile/profile_page.dart';
 import 'package:babershop_managerment/views/home/home.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
@@ -30,7 +30,7 @@ class _NavigationPageState extends State<NavigationPage> {
   List<String> listOfNamePages = [
     'Trang chủ',
     'Quản lý',
-    'Thông báo',
+    'Cài đặt',
     'Tài khoản',
   ];
 

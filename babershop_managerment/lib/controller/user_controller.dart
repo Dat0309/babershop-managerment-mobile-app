@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:babershop_managerment/controller/order_controller.dart';
 import 'package:babershop_managerment/models/ProfileModel.dart';
 import 'package:babershop_managerment/services/reposiitory/user_repo.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,8 @@ class UserController extends GetxController {
   Future<void> getProfile() async {
     await userRepo.getProfile().then((value) {
       if (value.statusCode == 200) {
+        Get.find<OrderController>().adminGetAllOrder();
+        Get.find<OrderController>().adminGetAllSalary();
         final Map<String, dynamic> res = json.decode(value.body);
 
         if (res.isNotEmpty) {

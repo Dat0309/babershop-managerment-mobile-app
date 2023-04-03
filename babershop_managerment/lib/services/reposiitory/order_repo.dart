@@ -154,4 +154,17 @@ class OrderRepo extends GetxService {
     );
     return res;
   }
+
+  Future<http.Response> adminStatistics() async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse(AppUrl.ADMIN_STATISTICS),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
 }

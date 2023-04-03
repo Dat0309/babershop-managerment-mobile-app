@@ -1,19 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 
-import 'package:babershop_managerment/controller/order_controller.dart';
-import 'package:babershop_managerment/models/OrderModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:babershop_managerment/constant/colors.dart';
+import 'package:babershop_managerment/controller/order_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 
 class ChartStatisticsBaberWidget extends StatefulWidget {
-  final List<dynamic> orders;
+  final String name;
+  final dynamic statistics;
   const ChartStatisticsBaberWidget({
     Key? key,
-    required this.orders,
+    required this.name,
+    required this.statistics,
   }) : super(key: key);
 
   @override
@@ -34,15 +36,11 @@ class _ChartStatisticsBaberWidgetState
     super.initState();
   }
 
-  int getTotalPrice(String date, List<dynamic> orders) {
+  @override
+  int getTotalPrice(List<dynamic> orders) {
     int sum = 0;
-    List<dynamic> filter = [];
-    filter.addAll(orders);
-    filter.retainWhere((element) {
-      return element.createdAt.contains(date);
-    });
-    filter.forEach((element) {
-      sum += element.serviceTotalPrice as int;
+    orders.forEach((element) {
+      sum += element['service_total_price'] as int;
     });
     return sum;
   }
@@ -50,7 +48,8 @@ class _ChartStatisticsBaberWidgetState
   void updateDataSource(Timer timer) {
     Get.find<OrderController>().staffGetAllOrdersOfBabershop();
     _chartSeriesController.updateDataSource(
-        addedDataIndex: widget.orders.length - 1, removedDataIndex: 0);
+        addedDataIndex: widget.statistics.orderChartData.length - 1,
+        removedDataIndex: 0);
   }
 
   @override
@@ -60,10 +59,10 @@ class _ChartStatisticsBaberWidgetState
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.radius15),
-            color: AppColors.secondaryColor,
+            color: AppColors.thirthColor,
           ),
           child: SfCartesianChart(
-            title: ChartTitle(text: 'Thống kê doanh thu của tiệm'),
+            title: ChartTitle(text: widget.name),
             tooltipBehavior: _tooltipBehavior,
             primaryXAxis: CategoryAxis(),
             series: <LineSeries<dynamic, String>>[
@@ -73,11 +72,11 @@ class _ChartStatisticsBaberWidgetState
                   _chartSeriesController = controller;
                 }),
                 color: AppColors.primaryColor,
-                dataSource: widget.orders,
-                xValueMapper: (dynamic orders, _) =>
-                    orders.createdAt.toString().split('T')[0],
-                yValueMapper: (dynamic orders, _) =>
-                    getTotalPrice(orders.createdAt, widget.orders),
+                dataSource: widget.statistics.orderChartData,
+                xValueMapper: (dynamic orderChartData, _) =>
+                    orderChartData['time'].toString().split(" ")[0],
+                yValueMapper: (dynamic orderChartData, _) =>
+                    getTotalPrice(orderChartData['orders']),
                 dataLabelSettings: const DataLabelSettings(isVisible: true),
               )
             ],

@@ -20,9 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Get.find<UserController>().getProfile();
-    Get.find<OrderController>().staffGetAllOrderIOfThem();
-    Get.find<OrderController>().staffGetOrdersOfBabershop();
-    Get.find<OrderController>().staffGetAllOrdersOfBabershop();
+    Get.find<OrderController>().adminStatistics();
     return LayoutBuilder(builder: (context, constraints) {
       return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
