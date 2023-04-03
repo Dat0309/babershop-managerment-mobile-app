@@ -44,7 +44,7 @@ class OrderController extends GetxController {
     await orderRepo.getAllStaffSalary().then((value) {
       if (value.statusCode == 200) {
         final Map<String, dynamic> res = json.decode(value.body);
-        print(res);
+
         if (res['staffSalary'].length > 0) {
           staffSalary.clear();
           for (int i = 0; i < res['staffSalary'].length; i++) {
@@ -106,7 +106,6 @@ class OrderController extends GetxController {
     await orderRepo.adminGetAllOrders().then((value) {
       if (value.statusCode == 200) {
         final Map<String, dynamic> res = json.decode(value.body);
-        print(res);
 
         if (res['orders'].length > 0) {
           orders.clear();

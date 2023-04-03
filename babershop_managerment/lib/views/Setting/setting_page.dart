@@ -1,5 +1,6 @@
 import 'package:babershop_managerment/controller/user_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
+import 'package:babershop_managerment/views/Setting/detail_service_screen.dart';
 import 'package:babershop_managerment/views/Setting/widgets/list_service_setting_widget.dart';
 import 'package:babershop_managerment/views/Setting/widgets/setting_quotes.dart';
 import 'package:babershop_managerment/views/authentication/widget/button.dart';
@@ -36,7 +37,11 @@ class _NotificationPageState extends State<NotificationPage> {
                       bottom: Dimensions.widthPadding40,
                       top: Dimensions.widthPadding20,
                     ),
-                    child: const CustomButton(text: 'Thêm dịch vụ'),
+                    child: GestureDetector(
+                        onTap: () {
+                          Get.to(() => const DetailServiceScreen());
+                        },
+                        child: const CustomButton(text: 'Thêm dịch vụ')),
                   ),
                   const ListServiceSettingWidget(),
                 ],
