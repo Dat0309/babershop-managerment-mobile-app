@@ -19,6 +19,9 @@ class ServiceController extends GetxController {
   List<dynamic> services = [];
 
   bool isLoaded = false;
+  bool isCreated = false;
+  bool isUpdated = false;
+  bool isDeleted = false;
 
   BookingController _booking = Get.find<BookingController>();
 
@@ -62,6 +65,85 @@ class ServiceController extends GetxController {
       } else {}
       return value;
     });
+  }
+
+  Future<Map<String, dynamic>> createServices(
+      String serviceName, int price, double percent) async {
+    var result;
+    await servicesRepo
+        .createServices(serviceName, price, percent)
+        .then((value) {
+      if (value.statusCode == 201) {
+        final Map<String, dynamic> res = json.decode(value.body);
+        Services services = Services.fromMap(res);
+        isCreated = true;
+
+        result = {
+          'status': true,
+          'message': 'Successfull',
+          'services': services,
+        };
+        update();
+      } else {
+        result = {
+          'status': false,
+          'code': value.statusCode,
+          'message': value.body,
+        };
+        update();
+      }
+    });
+    return result;
+  }
+
+  Future<Map<String, dynamic>> updateServices(Services servicesModel) async {
+    var result;
+    await servicesRepo.updateServices(servicesModel).then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+        Services services = Services.fromMap(res);
+        isUpdated = true;
+
+        result = {
+          'status': true,
+          'message': 'Successfull',
+          'services': services,
+        };
+        update();
+      } else {
+        result = {
+          'status': false,
+          'code': value.statusCode,
+          'message': value.body,
+        };
+        update();
+      }
+    });
+    return result;
+  }
+
+  Future<Map<String, dynamic>> deleteServices(String id) async {
+    var result;
+    await servicesRepo.deleteServices(id).then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+        isDeleted = true;
+
+        result = {
+          'status': true,
+          'message': 'Successfull',
+        };
+        update();
+      } else {
+        result = {
+          'status': false,
+          'code': value.statusCode,
+          'message': value.body,
+        };
+        update();
+      }
+    });
+    return result;
   }
 
   void addBookingItem(Services product, int qty) {
