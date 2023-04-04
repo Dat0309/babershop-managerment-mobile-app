@@ -1,7 +1,10 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:convert';
 
 import 'package:babershop_managerment/controller/order_controller.dart';
 import 'package:babershop_managerment/models/ProfileModel.dart';
+import 'package:babershop_managerment/services/preferences/user_preference.dart';
 import 'package:babershop_managerment/services/reposiitory/user_repo.dart';
 import 'package:get/get.dart';
 
@@ -12,13 +15,23 @@ class UserController extends GetxController {
 
   bool isLoadedProfile = false;
   bool isUpdateSalary = false;
+  int tempSalary = 0;
 
   late Profile? profile;
+
+  Future<void> getTempSalary() async {
+    await UserPreference().getTempSalary().then((value) {
+      if (value != null) {
+        print(value);
+        tempSalary = value;
+        update();
+      }
+    });
+  }
 
   Future<void> getProfile() async {
     await userRepo.getProfile().then((value) {
       if (value.statusCode == 200) {
-        Get.find<OrderController>().adminGetAllOrder();
         Get.find<OrderController>().adminGetAllSalary();
         final Map<String, dynamic> res = json.decode(value.body);
 
@@ -34,22 +47,12 @@ class UserController extends GetxController {
     });
   }
 
+  Future<void> clearSalary() async {
+    await UserPreference().setTempSalary(0);
+  }
+
   Future<void> updateSalary(int salary) async {
-    await userRepo.updateSalary(salary).then((value) {
-      if (value.statusCode == 200) {
-        final Map<String, dynamic> res = json.decode(value.body);
-
-        if (res.isNotEmpty) {
-          profile = Profile.fromMap(res);
-
-          isUpdateSalary = true;
-          update();
-        } else {
-          print('res is empty');
-        }
-      } else {
-        print('error');
-      }
-    });
+    int tempSalary = await UserPreference().getTempSalary();
+    await UserPreference().setTempSalary(tempSalary + salary);
   }
 }

@@ -37,6 +37,7 @@ class _BookingDetailViewState extends State<BookingDetailView> {
         .then((value) {
       if (value['status']) {
         Get.find<UserController>().getProfile();
+        Get.find<UserController>().updateSalary(value['user_salary']);
         AwesomeDialog(
           context: context,
           animType: AnimType.scale,

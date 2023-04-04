@@ -16,6 +16,7 @@ class UserPreference {
     sharedPreferences.setString('full_name', auth.fullName!);
     sharedPreferences.setString('createdAt', auth.createAt!);
     sharedPreferences.setInt('salary', auth.salary!);
+    sharedPreferences.setInt("temp_salary", 0);
 
     return sharedPreferences.commit();
   }
@@ -54,6 +55,7 @@ class UserPreference {
     sharedPreferences.remove('salary');
     sharedPreferences.remove("createAt");
     sharedPreferences.remove("token");
+    sharedPreferences.remove("temp_salary");
   }
 
   Future<String> getToken() async {
@@ -64,5 +66,25 @@ class UserPreference {
       result = sharedPreference.getString(AppConstant.TOKEN)!;
     }
     return result;
+  }
+
+  Future<int> getTempSalary() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    int result = 0;
+    if (sharedPreferences.containsKey("temp_salary")) {
+      result = sharedPreferences.getInt("temp_salary")!;
+    } else {
+      print(sharedPreferences.getInt("temp_salary")!);
+    }
+    return result;
+  }
+
+  Future<bool> setTempSalary(int salary) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
+    sharedPreferences.setInt("temp_salary", salary);
+    return sharedPreferences.commit();
   }
 }

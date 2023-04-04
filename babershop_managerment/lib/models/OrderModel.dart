@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class Order {
   String? babershopId;
-  Map<String, dynamic>? staffId;
+  String? staffId;
   List<dynamic>? servicesItems;
   String? paymentMethod;
   int? serviceTotalPrice;
@@ -21,7 +21,7 @@ class Order {
 
   Order copyWith({
     String? babershopId,
-    Map<String, dynamic>? staffId,
+    String? staffId,
     List<dynamic>? servicesItems,
     String? paymentMethod,
     int? serviceTotalPrice,
@@ -51,8 +51,7 @@ class Order {
   factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
       babershopId: map['babershop'] != null ? map['babershop'] as String : null,
-      staffId:
-          map['staff'] != null ? map['staff'] as Map<String, dynamic> : null,
+      staffId: map['staff'] != null ? map['staff'] as String : null,
       servicesItems: map['services_items'] != null
           ? List<dynamic>.from((map['services_items'] as List<dynamic>))
           : null,

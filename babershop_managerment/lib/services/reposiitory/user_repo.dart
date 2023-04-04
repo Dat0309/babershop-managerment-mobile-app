@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import
 
+import 'dart:convert';
+
 import 'package:babershop_managerment/constant/app_url.dart';
 import 'package:babershop_managerment/services/preferences/user_preference.dart';
 import 'package:get/get.dart';
@@ -27,12 +29,12 @@ class UserRepo extends GetxService {
     String token = await UserPreference().getToken();
     http.Response res = await http.put(
       Uri.parse(AppUrl.USER_UPDATE_SALARY),
+      body: json.encode({salary: salary}),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: {salary: salary},
     );
     return res;
   }

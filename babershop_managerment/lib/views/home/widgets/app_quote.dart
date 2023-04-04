@@ -34,6 +34,9 @@ class _AppQuoteState extends State<AppQuote> {
                     height: Dimensions.heightPadding10,
                   ),
                   GestureDetector(
+                    onTap: () {
+                      user.clearSalary();
+                    },
                     child: Container(
                       padding: EdgeInsets.all(Dimensions.widthPadding15),
                       decoration: BoxDecoration(

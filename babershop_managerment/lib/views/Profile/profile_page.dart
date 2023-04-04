@@ -18,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<UserController>(builder: (userController) {
+        userController.getTempSalary();
         return userController.isLoadedProfile
             ? SafeArea(
                 top: true,
@@ -119,23 +120,29 @@ class _ProfilePageState extends State<ProfilePage> {
                                             alignment: Alignment.center,
                                             child: BigText(
                                                 text:
-                                                    '${userController.profile!.salary} vnđ'),
+                                                    '${userController.tempSalary} vnđ'),
                                           ),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: Container(
-                                              padding: EdgeInsets.all(
-                                                  Dimensions.widthPadding15),
-                                              decoration: BoxDecoration(
-                                                color: AppColors.primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        Dimensions.radius15),
-                                              ),
-                                              child: BigText(
-                                                text: 'Nhận lương',
-                                                color: AppColors.primaryBgColor,
-                                                size: Dimensions.font24,
+                                          GestureDetector(
+                                            onTap: () {
+                                              userController.clearSalary();
+                                            },
+                                            child: Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: Container(
+                                                padding: EdgeInsets.all(
+                                                    Dimensions.widthPadding15),
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.primaryColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          Dimensions.radius15),
+                                                ),
+                                                child: BigText(
+                                                  text: 'Nhận lương',
+                                                  color:
+                                                      AppColors.primaryBgColor,
+                                                  size: Dimensions.font24,
+                                                ),
                                               ),
                                             ),
                                           ),

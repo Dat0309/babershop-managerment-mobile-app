@@ -237,6 +237,7 @@ class OrderController extends GetxController {
           'status': true,
           'message': 'Successfull',
           'order': order,
+          'user_salary': resData['user_salary']
         };
         bookingController.clearBooking();
         update();
