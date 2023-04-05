@@ -51,15 +51,6 @@ workflows:
     max_build_duration: 120
     integrations:
       app_store_connect: codemagic
-    environment:
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: io.codemagic.flutteryaml
-      vars:
-        APP_ID: 1111111111 # <-- Put your APP ID here
-      flutter: stable
-      xcode: latest
-      cocoapods: default
     scripts:
       - name: Set up code signing settings on Xcode project
         script: |
