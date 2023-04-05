@@ -22,7 +22,6 @@ class UserController extends GetxController {
   Future<void> getTempSalary() async {
     await UserPreference().getTempSalary().then((value) {
       if (value != null) {
-        print(value);
         tempSalary = value;
         update();
       }
@@ -41,9 +40,7 @@ class UserController extends GetxController {
           isLoadedProfile = true;
           update();
         }
-      } else {
-        print('user ${value.statusCode}');
-      }
+      } else {}
     });
   }
 

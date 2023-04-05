@@ -1,8 +1,10 @@
+import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/controller/hairstyle_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/home/widgets/hairstyleListTile/hairstyle_pageview_card.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class PageviewHairStyle extends StatefulWidget {
   const PageviewHairStyle({super.key});
@@ -64,7 +66,40 @@ class _PageviewHairStyleState extends State<PageviewHairStyle> {
                   },
                 ),
               )
-            : SizedBox();
+            : SizedBox(
+                height: Dimensions.height350 + 50,
+                child: PageView.builder(
+                  padEnds: false,
+                  controller: pageController,
+                  itemCount: 5,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Opacity(
+                        opacity: curPage == index ? 1.0 : 0.5,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                left: Dimensions.widthPadding25,
+                              ),
+                              child: Container(
+                                width: Dimensions.widthPadding300,
+                                height: Dimensions.height350 + 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius15),
+                                  color: AppColors.signColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ));
+                  },
+                ),
+              );
       }),
     );
   }

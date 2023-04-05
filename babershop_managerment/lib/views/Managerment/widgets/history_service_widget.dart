@@ -4,7 +4,6 @@ import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/Managerment/widgets/history_service_card.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -74,7 +73,7 @@ class _HistoryServiceWidgetState extends State<HistoryServiceWidget> {
                 ),
               ],
             )
-          : CircularProgressIndicator();
+          : Container();
     });
   }
 }

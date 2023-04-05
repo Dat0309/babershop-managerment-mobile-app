@@ -15,12 +15,10 @@ class LocalSrorageHelper {
   }
 
   static dynamic getValues(String key) {
-    print(_shared.hiveBox?.get(key));
     return _shared.hiveBox?.get(key);
   }
 
   static setValue(String key, dynamic val) {
     _shared.hiveBox?.put(key, val);
-    print(key);
   }
 }

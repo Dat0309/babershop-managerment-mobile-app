@@ -6,12 +6,8 @@ import 'package:babershop_managerment/helper/asset_helper.dart';
 import 'package:babershop_managerment/helper/local_storage_helper.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/authentication/login_screen.dart';
-import 'package:babershop_managerment/views/home/navigation.dart';
 import 'package:babershop_managerment/views/intro/widgets/item_intro_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

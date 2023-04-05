@@ -4,7 +4,6 @@ import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/Managerment/widgets/staff_salary_card_widget.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -67,7 +66,7 @@ class _StaffSalaryWidgetState extends State<StaffSalaryWidget> {
                 )
               ],
             )
-          : CircularProgressIndicator();
+          : Container();
     });
   }
 }

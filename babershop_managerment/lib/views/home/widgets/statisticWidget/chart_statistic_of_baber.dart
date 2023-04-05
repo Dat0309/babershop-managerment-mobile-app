@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_function_literals_in_foreach_calls
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -30,13 +30,11 @@ class _ChartStatisticsBaberWidgetState
 
   @override
   void initState() {
-    // TODO: implement initState
     _tooltipBehavior = TooltipBehavior(enable: true);
     Timer.periodic(const Duration(days: 1), updateDataSource);
     super.initState();
   }
 
-  @override
   int getTotalPrice(List<dynamic> orders) {
     int sum = 0;
     orders.forEach((element) {

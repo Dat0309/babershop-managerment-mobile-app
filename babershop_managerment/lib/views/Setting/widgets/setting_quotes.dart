@@ -4,8 +4,6 @@ import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SettingQuotesWidget extends StatefulWidget {

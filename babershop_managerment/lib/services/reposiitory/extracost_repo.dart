@@ -17,7 +17,6 @@ class ExtracostRepo extends GetxService {
       'price': price,
     };
 
-    print(extracosts);
     http.Response response = await http.post(
       Uri.parse(AppUrl.EXTRACOST),
       body: json.encode(extracosts),

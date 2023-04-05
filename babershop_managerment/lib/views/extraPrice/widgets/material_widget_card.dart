@@ -1,10 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class MaterialWidgetCard extends StatelessWidget {
   final String title;
@@ -39,7 +36,7 @@ class MaterialWidgetCard extends StatelessWidget {
           SizedBox(
             height: Dimensions.heightPadding10,
           ),
-          Container(
+          SizedBox(
             width: Dimensions.widthPadding100 + 20,
             child: SmallText(
               text: title,

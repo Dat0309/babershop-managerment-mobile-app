@@ -24,8 +24,6 @@ class OrderRepo extends GetxService {
       'service_total_price': serviceTotalPrice,
     };
 
-    print(json.encode(orders));
-
     http.Response response = await http.post(
       Uri.parse(AppUrl.ORDER),
       body: json.encode(orders),
@@ -159,6 +157,19 @@ class OrderRepo extends GetxService {
     String token = await UserPreference().getToken();
     http.Response res = await http.get(
       Uri.parse(AppUrl.ADMIN_STATISTICS),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+    return res;
+  }
+
+  Future<http.Response> adminStatisicsById(String id) async {
+    String token = await UserPreference().getToken();
+    http.Response res = await http.get(
+      Uri.parse("${AppUrl.ADMIN_STATISTICS}/$id"),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',

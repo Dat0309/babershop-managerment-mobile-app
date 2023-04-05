@@ -1,12 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_typing_uninitialized_variables
 import 'dart:convert';
 
 import 'package:babershop_managerment/controller/booking_controller.dart';
 import 'package:babershop_managerment/models/CartModel.dart';
 import 'package:babershop_managerment/models/OrderModel.dart';
 import 'package:babershop_managerment/models/statisticsModel.dart';
-import 'package:babershop_managerment/services/preferences/user_preference.dart';
-import 'package:babershop_managerment/views/home/navigation.dart';
 import 'package:get/get.dart';
 
 import 'package:babershop_managerment/services/reposiitory/order_repo.dart';
@@ -26,7 +24,9 @@ class OrderController extends GetxController {
   List<Map<String, dynamic>> staffSalary = [];
 
   Order? order;
-  late StatistiscModel? statistiscModel;
+  StatistiscModel? statistiscModel = StatistiscModel();
+  StatistiscModel? statistiscModelShop1 = StatistiscModel();
+  StatistiscModel? statistiscModelShop2 = StatistiscModel();
   BookingController bookingController = Get.find();
 
   bool isLoadedOrders = false;
@@ -56,9 +56,7 @@ class OrderController extends GetxController {
           isLoadedStaffSalary = true;
           update();
         }
-      } else {
-        print(value.body);
-      }
+      } else {}
     });
   }
 
@@ -71,13 +69,41 @@ class OrderController extends GetxController {
 
         if (res['statistics'] != null) {
           statistiscModel = StatistiscModel.fromMap(res['statistics']);
-          isLoadedAdminStatistics = true;
           update();
         }
-      } else {
-        print(value.body);
-      }
+      } else {}
     });
+
+    await orderRepo
+        .adminStatisicsById("64056512ad05bb43ae0d0e02")
+        .then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+        if (res['statistics'] != null) {
+          statistiscModelShop2 = StatistiscModel.fromMap(res['statistics']);
+          update();
+        }
+      } else {}
+    });
+
+    await orderRepo
+        .adminStatisicsById("64056512ad05bb43ae0d0e01")
+        .then((value) {
+      if (value.statusCode == 200) {
+        final Map<String, dynamic> res = json.decode(value.body);
+        if (res['statistics'] != null) {
+          statistiscModelShop1 = StatistiscModel.fromMap(res['statistics']);
+          update();
+        }
+      } else {}
+    });
+
+    if (statistiscModel != null &&
+        statistiscModelShop1 != null &&
+        statistiscModelShop2 != null) {
+      isLoadedAdminStatistics = true;
+      update();
+    }
   }
 
   Future<void> adminGetAllOrderOfBabershop(String id) async {
@@ -118,9 +144,7 @@ class OrderController extends GetxController {
           isLoadedOrders = true;
           update();
         }
-      } else {
-        print(value.body);
-      }
+      } else {}
     });
   }
 

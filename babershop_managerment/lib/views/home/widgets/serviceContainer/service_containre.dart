@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/checkout/checkout_screen.dart';

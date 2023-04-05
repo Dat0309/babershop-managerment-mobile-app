@@ -1,11 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:babershop_managerment/models/HairStyleModel.dart';
 
 class HairStylePageviewCard extends StatelessWidget {

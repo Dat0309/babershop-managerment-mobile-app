@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_typing_uninitialized_variables
 import 'dart:convert';
 
 import 'package:babershop_managerment/constant/colors.dart';
@@ -126,7 +126,6 @@ class ServiceController extends GetxController {
     var result;
     await servicesRepo.deleteServices(id).then((value) {
       if (value.statusCode == 200) {
-        final Map<String, dynamic> res = json.decode(value.body);
         isDeleted = true;
 
         result = {

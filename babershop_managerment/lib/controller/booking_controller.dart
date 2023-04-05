@@ -24,7 +24,6 @@ class BookingController extends GetxController {
     var price = 0;
     items.forEach((key, value) {
       price += value.price! * value.qty!;
-      print(price);
     });
     return price;
   }

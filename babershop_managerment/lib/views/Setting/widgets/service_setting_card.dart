@@ -1,13 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:babershop_managerment/constant/colors.dart';
+import 'package:babershop_managerment/controller/services_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/Setting/detail_service_screen.dart';
+import 'package:babershop_managerment/views/authentication/widget/button.dart';
+import 'package:babershop_managerment/views/home/navigation.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:babershop_managerment/models/ServiceModel.dart';
 import 'package:get/get.dart';
@@ -57,7 +58,46 @@ class _ServiceSettingCardState extends State<ServiceSettingCard> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.find<ServiceController>()
+                  .deleteServices(widget.services.id!)
+                  .then((value) {
+                if (value['status']) {
+                  Get.find<ServiceController>().getServices();
+                  AwesomeDialog(
+                    context: context,
+                    animType: AnimType.scale,
+                    dialogType: DialogType.success,
+                    body: Center(
+                      child: Column(
+                        children: [
+                          const BigText(text: 'Xoá dịch vụ thành công'),
+                          SizedBox(
+                            height: Dimensions.widthPadding30,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.off(() => const NavigationPage());
+                            },
+                            child: const CustomButton(text: 'Trở về'),
+                          ),
+                          SizedBox(
+                            height: Dimensions.widthPadding30,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ).show();
+                } else {
+                  Get.snackbar(
+                    'Không ổn rồi anh Lâm',
+                    'Đã có lỗi sảy ra trong quá trình xáo dịch vụ. Vui lòng kiểm tra lại thông tin!',
+                    backgroundColor: AppColors.primaryColor,
+                    colorText: AppColors.primaryBgColor,
+                  );
+                }
+              });
+            },
             child: Container(
               width: Dimensions.widthPadding60,
               height: Dimensions.widthPadding60,

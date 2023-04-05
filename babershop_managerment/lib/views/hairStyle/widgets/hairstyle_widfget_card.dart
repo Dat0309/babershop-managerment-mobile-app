@@ -3,8 +3,6 @@ import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class HairStyleCard extends StatefulWidget {
   final String name;

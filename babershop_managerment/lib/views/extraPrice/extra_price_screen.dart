@@ -1,4 +1,3 @@
-import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/extraPrice/widgets/extra_price_card.dart';
 import 'package:babershop_managerment/views/extraPrice/widgets/lunch_price_screen.dart';

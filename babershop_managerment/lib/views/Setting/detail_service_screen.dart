@@ -3,13 +3,11 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/controller/services_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
-import 'package:babershop_managerment/views/Setting/setting_page.dart';
 import 'package:babershop_managerment/views/authentication/widget/button.dart';
 import 'package:babershop_managerment/views/authentication/widget/text_field.dart';
 import 'package:babershop_managerment/views/hairStyle/widgets/hair_style_header.dart';
-import 'package:babershop_managerment/widgets/appbar.dart';
+import 'package:babershop_managerment/views/home/navigation.dart';
 import 'package:babershop_managerment/widgets/big_text.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:babershop_managerment/models/ServiceModel.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +44,7 @@ class _DetailServiceScreenState extends State<DetailServiceScreen> {
                 double.parse(percentController.text))
             .then((value) {
           if (value['status']) {
+            servicesController.getServices();
             AwesomeDialog(
               context: context,
               animType: AnimType.scale,
@@ -59,7 +58,7 @@ class _DetailServiceScreenState extends State<DetailServiceScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.back();
+                        Get.off(() => const NavigationPage());
                       },
                       child: const CustomButton(text: 'Trở về'),
                     ),
@@ -71,8 +70,6 @@ class _DetailServiceScreenState extends State<DetailServiceScreen> {
               ),
             ).show();
           } else {
-            print(value['message']);
-            print(value['code']);
             Get.snackbar(
               'Không ổn rồi anh Lâm',
               'Đã có lỗi sảy ra trong quá trình thêm dịch vụ. Vui lòng kiểm tra lại thông tin!',
@@ -85,6 +82,7 @@ class _DetailServiceScreenState extends State<DetailServiceScreen> {
         servicesController.updateServices(widget.services!).then((value) {
           if (value['status']) {
             servicesController.getServices();
+
             AwesomeDialog(
               context: context,
               animType: AnimType.scale,
@@ -98,7 +96,7 @@ class _DetailServiceScreenState extends State<DetailServiceScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.back();
+                        Get.off(() => const NavigationPage());
                       },
                       child: const CustomButton(text: 'Trở về'),
                     ),
@@ -110,8 +108,6 @@ class _DetailServiceScreenState extends State<DetailServiceScreen> {
               ),
             ).show();
           } else {
-            print(value['message']);
-            print(value['code']);
             Get.snackbar(
               'Không ổn rồi anh Lâm',
               'Đã có lỗi sảy ra trong quá trình sửa dịch vụ. Vui lòng kiểm tra lại thông tin!',

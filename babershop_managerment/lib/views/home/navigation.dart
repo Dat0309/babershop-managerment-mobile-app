@@ -3,13 +3,11 @@ import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/Managerment/managerment_page.dart';
 import 'package:babershop_managerment/views/Setting/setting_page.dart';
 import 'package:babershop_managerment/views/Profile/profile_page.dart';
+import 'package:babershop_managerment/views/drawer/drawer_screen.dart';
 import 'package:babershop_managerment/views/home/home.dart';
 import 'package:babershop_managerment/widgets/small_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -46,7 +44,12 @@ class _NavigationPageState extends State<NavigationPage> {
     return Scaffold(
       backgroundColor: AppColors.primaryBgColor,
       body: SafeArea(
-        child: pages[curIndex],
+        child: Stack(
+          children: [
+            const DrawerScreen(),
+            pages[curIndex],
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(Dimensions.screenWidth * .05),

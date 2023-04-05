@@ -57,8 +57,6 @@ class _MaterialPriceScreenState extends State<MaterialPriceScreen> {
             ),
           ).show();
         } else {
-          print(value['message']);
-          print(value['code']);
           Get.snackbar(
             'Không ổn rồi anh Lâm',
             'Đã có lỗi sảy ra trong quá trình thanh toán. Vui lòng kiểm tra lại thông tin!',

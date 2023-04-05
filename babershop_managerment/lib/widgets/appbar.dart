@@ -1,14 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+
 import 'package:babershop_managerment/constant/colors.dart';
 import 'package:babershop_managerment/controller/user_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
-import 'package:flutter/cupertino.dart';
-
-import 'package:get/get.dart';
 
 class AppBarCustom extends StatefulWidget {
+  final bool isDrawerOpen;
+  final VoidCallback press;
+  final VoidCallback pressDrawerOpen;
   const AppBarCustom({
-    super.key,
-  });
+    Key? key,
+    required this.isDrawerOpen,
+    required this.press,
+    required this.pressDrawerOpen,
+  }) : super(key: key);
 
   @override
   State<AppBarCustom> createState() => _AppBarCustomState();
@@ -26,12 +33,25 @@ class _AppBarCustomState extends State<AppBarCustom> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            'assets/icons/menu.png',
-            height: Dimensions.widthPadding25,
-            width: Dimensions.widthPadding25,
-            fit: BoxFit.cover,
-          ),
+          widget.isDrawerOpen
+              ? GestureDetector(
+                  onTap: widget.press,
+                  child: Image.asset(
+                    'assets/icons/menu.png',
+                    height: Dimensions.widthPadding25,
+                    width: Dimensions.widthPadding25,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : GestureDetector(
+                  onTap: widget.pressDrawerOpen,
+                  child: Image.asset(
+                    'assets/icons/menu.png',
+                    height: Dimensions.widthPadding25,
+                    width: Dimensions.widthPadding25,
+                    fit: BoxFit.cover,
+                  ),
+                ),
           GetBuilder<UserController>(builder: (user) {
             return user.isLoadedProfile
                 ? Container(

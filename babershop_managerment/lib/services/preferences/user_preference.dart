@@ -74,9 +74,7 @@ class UserPreference {
     int result = 0;
     if (sharedPreferences.containsKey("temp_salary")) {
       result = sharedPreferences.getInt("temp_salary")!;
-    } else {
-      print(sharedPreferences.getInt("temp_salary")!);
-    }
+    } else {}
     return result;
   }
 

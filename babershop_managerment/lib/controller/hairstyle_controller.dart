@@ -19,6 +19,7 @@ class HairStyleController extends GetxController {
   bool isLoaded = false;
 
   Future<void> getLimitHairstyle() async {
+    isLoadedLimit = false;
     await hairStyleRepo.getHairstyles().then((value) {
       if (value.statusCode == 200) {
         final Map<String, dynamic> resData = json.decode(value.body);
@@ -40,6 +41,7 @@ class HairStyleController extends GetxController {
   }
 
   Future<void> getHairstyle() async {
+    isLoaded = false;
     await hairStyleRepo.getAllHairstyles().then((value) {
       if (value.statusCode == 200) {
         final Map<String, dynamic> resData = json.decode(value.body);

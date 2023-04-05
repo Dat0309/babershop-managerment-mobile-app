@@ -1,7 +1,6 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:babershop_managerment/constant/colors.dart';
-import 'package:babershop_managerment/controller/anim_controller.dart';
 import 'package:babershop_managerment/controller/services_controller.dart';
 import 'package:babershop_managerment/util/dimensions.dart';
 import 'package:babershop_managerment/views/checkout/widgets/booking_detail_view.dart';
