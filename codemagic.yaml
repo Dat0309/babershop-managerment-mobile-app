@@ -49,12 +49,12 @@ workflows:
   ios-workflow:
     name: iOS Workflow
     max_build_duration: 120
-    integrations:
+   integrations:
       app_store_connect: codemagic
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: anhtheboy011@gmail.com
+        bundle_identifier: io.codemagic.flutteryaml
       vars:
         APP_ID: 1111111111 # <-- Put your APP ID here
       flutter: stable
